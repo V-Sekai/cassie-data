@@ -1,6 +1,8 @@
 import numpy as np
 import math
 
+#### This file contains simple functions to compute bezier and line curve points, given the control points
+
 # Determine curve type
 def curve_is_line(ctrl_pts):
     return (len(ctrl_pts) > 0 and len(ctrl_pts[0]) == 2)
@@ -29,12 +31,6 @@ def bezier(t, points):
         z += pos[2] * bern
     return x, y, z
 
-# def closest_idx(t):
-#     for i, p in enumerate(params):
-#         if t < p:
-#             return i - 1
-#     return len(params) - 1
-
 def get_idx_and_param(t, beziers):
     n = len(beziers)
     if t == 1:
@@ -42,9 +38,6 @@ def get_idx_and_param(t, beziers):
 
     p = [(i/n) for i in range(n + 1)]
     bezier_idx = int(t * n)
-    # Pad params with 1
-    # p = params[:]
-    # p.append(1)
     u = (t - p[bezier_idx]) / (p[bezier_idx + 1] - p[bezier_idx])
     return (bezier_idx, u)
 
