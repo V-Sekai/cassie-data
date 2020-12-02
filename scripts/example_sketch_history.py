@@ -2,10 +2,8 @@ import sys
 
 from utils.load import *
 
-# Polyscope is a dependency for this script! Install it: https://polyscope.run/py/installing/
+# /!\ Polyscope is a dependency for this script! Install it: https://polyscope.run/py/installing/
 from utils.polyscope_display import *
-
-SKETCH_HISTORY_FOLDER = os.path.join(os.path.realpath('..'), 'data/sketch_history')
 
 # DRAW PARAMETERS
 draw_structured = True

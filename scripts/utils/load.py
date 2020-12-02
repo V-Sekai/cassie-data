@@ -2,6 +2,9 @@ import os
 import re
 import json
 
+SKETCH_RAW_FOLDER = os.path.join(os.path.realpath('..'), 'data/raw_data')
+SKETCH_HISTORY_FOLDER = os.path.join(os.path.realpath('..'), 'data/sketch_history')
+SKETCH_GRAPH_FOLDER = os.path.join(os.path.realpath('..'), 'data/sketch_graph')
 
 def get_file_path(root_folder, user_id, system_id, model_id):
     correct_file = None
@@ -11,7 +14,6 @@ def get_file_path(root_folder, user_id, system_id, model_id):
     # r=root, d=directories, f = files
     for r, d, f in os.walk(root_folder):
         for file in f:
-            print(file)
             if '.json' in file:
                 if re.search(regex_string, file) is not None:
                     correct_file = file
