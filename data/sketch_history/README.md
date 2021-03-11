@@ -9,20 +9,20 @@ Each files contains a list of stroke objects, each stroke object being described
 ```js
 {
   // Unique ID
-	id: i,
+  id: i,
   // A list of N 3D input points captured for this stroke
-	input_samples: [ [x, y, z], ...],
+  input_samples: [ [x, y, z], ...],
   // Type of the curve described by the control points
   curve_type: 'polybezier' | 'line',
   // A list of the control points describing the fitted curve (either a line or a cubic polybézier)
   ctrl_pts: [
-            	[[x0, y0, z0], [x1, y1, z1], [x2, y2, z2], [x0, y0, z0]], // ctrl pts for 1 cubic bezier
-  						[ ... ]
-						],
-	// Time of creation of this stroke
-	creation_time: t,
-	// Time of deletion of this stroke (or null if it wasn't deleted)
-	deletion_time: t | None
+              [[x0, y0, z0], [x1, y1, z1], [x2, y2, z2], [x0, y0, z0]], // ctrl pts for 1 cubic bezier
+              [ ... ]
+            ],
+  // Time of creation of this stroke
+  creation_time: t,
+  // Time of deletion of this stroke (or null if it wasn't deleted)
+  deletion_time: t | None
 }
 ```
 
