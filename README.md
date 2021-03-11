@@ -20,7 +20,7 @@ All sketches were collected in our custom VR sketching system, and are not repre
 The data files available are, for each sketch, in 3 sub-folders:
 
 * `raw_data` : direct export from CASSIE interactive applications, in the form of a full history of actions undertaken by the user during this session, and lists of primitives (strokes and patches) created (NB: the mesh for each patch was not recorded).
-* [`sketch_history`](sketch_history/README.md) : a list of all strokes sketched during the session, along with creation/deletion time (if deleted), and both the raw input samples captured from the controller position and the structured result outputed by CASSIE (in the form of a poly-Bézier or line).
+* [`sketch_history`](data/sketch_history/README.md) : a list of all strokes sketched during the session, along with creation/deletion time (if deleted), and both the raw input samples captured from the controller position and the structured result outputed by CASSIE (in the form of a poly-Bézier or line).
 * `sketch_graph` : lists of strokes, graph segments and graph nodes that describe the connectivity structure of the sketch (NB: this is only available for structured sketches, done in *Armature* and *Patch* systems. Only available for study sketches for now).
 
 For most purposes, the data from `sketch_history` folder should contain all necessary data. For example, these files are used to visualize sketching sessions on the [CASSIE data website](http://www-sop.inria.fr/members/Emilie.Yu/CASSIE-sketch-explorer/).

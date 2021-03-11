@@ -6,7 +6,7 @@ Each file contains a record of all strokes sketched during the session, along wi
 
 Each files contains a list of stroke objects, each stroke object being described by the following scheme:
 
-```json
+```js
 {
   // Unique ID
 	id: i,
