@@ -10,6 +10,14 @@ def add_edge_indices_for_stroke(indices, node_count):
     right = np.arange(start_idx + 1, start_idx + 1 + N).reshape(-1,1)
     return np.append(indices, np.concatenate((left, right), axis = 1), axis = 0)
 
+def get_edges_for_strokes(polylines):
+    edges = np.empty((0,2))
+
+    for poly in polylines:
+        edges = add_edge_indices_for_stroke(edges, len(poly))
+
+    return edges.astype(int)
+
 
 def polyscope_draw_all_sketch(sketch_history, draw_structured = True, skip_deleted = True):
 

@@ -22,6 +22,7 @@ def render_with_pythree(geometry_to_draw):
         position=[2, 3, 0], aspect=view_width/view_height)
     light = three.AmbientLight(intensity=2)
     axes = three.AxesHelper(size=10)
+    # key_light = three.DirectionalLight(color='white', position=[3, 5, 1], intensity=0.5)
 
     scene_children = [camera, light, axes] + geometry_to_draw
 
@@ -40,6 +41,8 @@ def pythree_polylines(polylines, colors = None):
 
     if colors is None:
         colors = colors_list
+    elif len(colors) == 1:
+        colors = [colors[0]] * len(polylines)
 
     for i, samples_list in enumerate(polylines):
 
@@ -63,6 +66,8 @@ def pythree_curves(curves, draw_ctrl_pts = False, colors = None, samples_by_bezi
 
     if colors is None:
         colors = colors_list
+    elif len(colors) == 1:
+        colors = [colors[0]] * len(curves)
 
     for i, poly in enumerate(curves):
         if curve_is_line(poly):
@@ -115,6 +120,9 @@ def pythree_vectors(directions, origins, colors = None, length = 1):
     geometry = []
     if colors is None:
         colors = colors_list
+    elif len(colors) == 1:
+        colors = [colors[0]] * len(directions)
+
     for i, (vec, pos) in enumerate(zip(directions, origins)):
         a = pos
         vec = vec / np.linalg.norm(vec)
@@ -149,6 +157,8 @@ def pythree_points(points, colors = None, radius = 0.05):
     geometry = []
     if colors is None:
         colors = colors_list
+    elif len(colors) == 1:
+        colors = [colors[0]] * len(points)
     for i, pt in enumerate(points):
         sphere = three.Mesh(
                         three.SphereBufferGeometry(radius, 16, 16),
@@ -168,8 +178,8 @@ def pythree_mesh(vertices, faces, color = None, wireframe=True):
         position = three.BufferAttribute(np.asarray(vertices, dtype=np.float32), normalized=False),
         index =    three.BufferAttribute(np.asarray(faces, dtype=np.uint32), normalized=False)
     )
-    mesh_geom = three.BufferGeometry(attributes=mesh_attributes)
-    mesh_obj = three.Mesh(geometry=mesh_geom, material=three.MeshStandardMaterial(color=color, wireframe=wireframe, side='DoubleSide'))
+    mesh_geom = three.BufferGeometry(attributes=mesh_attributes) # TODO: generate the vertex normals in order to shade the mesh (shading doesn't work now)
+    mesh_obj = three.Mesh(geometry=mesh_geom, material=three.MeshBasicMaterial(color=color, wireframe=wireframe, side='DoubleSide'))
 
     geometry.append(mesh_obj)
     return geometry
