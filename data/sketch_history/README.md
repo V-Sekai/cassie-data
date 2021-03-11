@@ -4,7 +4,7 @@ Each file contains a record of all strokes sketched during the session, along wi
 
 ## JSON format
 
-Each file contains a list of stroke objects, each stroke object being described by the following scheme:
+Each file contains a list of stroke objects, each stroke object is described by the following scheme:
 
 ```js
 {

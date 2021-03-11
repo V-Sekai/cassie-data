@@ -16,7 +16,7 @@ skip_deleted = True
 ####    OR file_name.json
 
 def main(arg):
-    print(SKETCH_HISTORY_FOLDER)
+
     if len(arg) == 3:
         print("Attempting to display model by user {} with system {} (model = {})".format(arg[0], arg[1], arg[2]))
         file_path = get_file_path(SKETCH_HISTORY_FOLDER, int(arg[0]), int(arg[1]), int(arg[2]))
