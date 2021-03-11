@@ -4,7 +4,7 @@ Each file is a direct export from CASSIE interactive applications, in the form o
 
 NB: contrary to stroke geometric data, the mesh data for each patch was not recorded, only creation events and manual deletion events.
 
-> This is most probably not useful data for future usages, and is only provided for completeness. Please check out the processed data formats, such as [`sketch_history`](data/sketch_history) and [`sketch_graph`](data/sketch_graph).
+> This is most probably not useful data for future usages, and is only provided for completeness. Please check out the processed data formats, such as [`sketch_history`](../sketch_history) and [`sketch_graph`](../sketch_graph).
 
 ## JSON format
 
