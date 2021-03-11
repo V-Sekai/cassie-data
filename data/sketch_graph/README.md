@@ -8,6 +8,10 @@ The sketch graph data represents the final state of the sketch, contrary to the 
 
 A stroke is composed of one or multiple segments, and segments have 2 endpoint nodes. Multiple segments may meet at a node.
 
+## Examples of use
+
+* [Python script that displays the curve network for a sketch](../../scripts/example_sketch_graph.py)
+
 ## JSON format
 
 Each files contains a JSON object described by the following scheme:

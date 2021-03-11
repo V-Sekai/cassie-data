@@ -17,9 +17,9 @@ colors_list = list(mcolors.TABLEAU_COLORS.values())
 ##### Base rendering function
 # Pass it a list of pythree objects, they get added to an empty scene and rendered
 # The scene contains only some axes and an ambient light
-def render_with_pythree(geometry_to_draw):
+def render_with_pythree(geometry_to_draw, center = (0, 1, 0)):
     camera = three.PerspectiveCamera(
-        position=[2, 3, 0], aspect=view_width/view_height)
+        position=[2, 2, 0], aspect=view_width/view_height)
     light = three.AmbientLight(intensity=2)
     axes = three.AxesHelper(size=10)
     # key_light = three.DirectionalLight(color='white', position=[3, 5, 1], intensity=0.5)
@@ -29,7 +29,7 @@ def render_with_pythree(geometry_to_draw):
     scene = three.Scene(children=scene_children)
     renderer = three.Renderer(camera=camera, scene=scene,
                               controls=[three.OrbitControls(
-                                  controlling=camera)],
+                                  controlling=camera, target=center)],
                               width=view_width, height=view_height)
     display(renderer)
 

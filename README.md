@@ -46,7 +46,7 @@ For example, you can try to display a sketch by running *(NB: needs polyscope to
 > python3 example_sketch_graph.py 2 2 2
 ```
 
-Or launch the jupyter notebook `Example - sketch history with pythreejs.ipynb` *(NB: needs pythreejs to run)*.
+Or launch the jupyter notebook [`Example - sketch history with pythreejs.ipynb`](scripts/Example%20-%20sketch%20history%20with%20pythreejs.html) *(NB: needs pythreejs if you want to run it locally)*.
 
 ## File naming convention
 

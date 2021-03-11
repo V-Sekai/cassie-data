@@ -2,6 +2,11 @@
 
 Each file contains a record of all strokes sketched during the session, along with creation/deletion time (if deleted), and both the raw input samples captured from the controller position and the structured result outputed by CASSIE (in the form of a poly-Bézier or line).
 
+## Examples of use
+
+* [Python script that displays a sketch](../../scripts/example_sketch_history.py)
+* [Jupyter Notebook](../../scripts/Example%20-%20sketch%20history%20with%20pythreejs.html)
+
 ## JSON format
 
 Each file contains a list of stroke objects, each stroke object is described by the following scheme:
