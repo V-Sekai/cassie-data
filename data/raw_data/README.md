@@ -80,7 +80,6 @@ Each files contains a JSON object described by the following scheme:
 ## Remarks
 
 * Since this data is straight out from the Unity application, some minor aspects of the data are not uniform across files because of minor changes to the application done at some point in time, to accomodate for more precise data gathering. The main change is on the format of `appliedPositionConstraints` and `rejectedPositionConstraints` which sometimes contain only a 3D vector, and sometimes contain more data. Those were specific to our user study and shouldn't be very useful for general usage.
-* Time is stored as an absolute value relative to some arbitrary origin, it does not necessarily start at 0 at beginning of sketch. Time unit is second.
 * The control points refer to the neatened curve obtained from the input samples by our system. In case of the *Freehand* system (files `xx-0-x.json`), this corresponds to simple line/polybézier fitting. In case of the other 2 systems, this corresponds to the neatened curve, taking into account potential intersection and beautification constraints.
 * We store both lines and cubic polybéziers as a flat list of control points (eg a polybézier with 2 segments would have 2 * 4 - 1 = 7 ctrl pts).
 * All vectors are stored as objects with `x, y, z` properties.

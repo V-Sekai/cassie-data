@@ -20,7 +20,7 @@ All sketches were collected in our custom VR sketching system, and are not repre
 The data files available are, for each sketch, in 3 sub-folders:
 
 * [`sketch_history`](data/sketch_history#sketch-history-data) : a list of all strokes sketched during the session, along with creation/deletion time (if deleted), and both the raw input samples captured from the controller position and the structured result outputed by CASSIE (in the form of a poly-Bézier or line).
-* [`sketch_graph`](data/sketch_graph#sketch-graph-data) : lists of strokes, graph segments and graph nodes that describe the connectivity structure of the sketch (NB: this is only available for structured sketches, done in *Armature* and *Patch* systems. Only available for study sketches for now).
+* [`sketch_graph`](data/sketch_graph#sketch-graph-data) : lists of strokes, graph segments and graph nodes that describe the connectivity structure of the sketch (NB: this is only available for structured sketches, done in *Armature* and *Patch* systems).
 * [`raw_data`](data/raw_data#raw-data) : direct export from CASSIE interactive applications, in the form of a full history of actions undertaken by the user during this session, and lists of primitives (strokes and patches) created (NB: the mesh for each patch was not recorded).
 
 For most purposes, the data from `sketch_history` folder should contain all necessary data. For example, these files are used to visualize sketching sessions on the [CASSIE data website](http://www-sop.inria.fr/members/Emilie.Yu/CASSIE-sketch-explorer/).
@@ -41,6 +41,9 @@ For example, you can try to display a sketch by running *(NB: needs polyscope to
 
 # Display the sketch from participant 9, done with the Armature system (1), of the shoe model (2)
 > python3 example_sketch_history.py 9 1 2
+
+# Display the curve network from participant 2, done with the Patch system (2), of the shoe model (2)
+> python3 example_sketch_graph.py 2 2 2
 ```
 
 Or launch the jupyter notebook `Example - sketch history with pythreejs.ipynb` *(NB: needs pythreejs to run)*.
@@ -65,3 +68,8 @@ And for the models:
 * Shoe = 2
 
 The sketches done outside of the study are all done in the full CASSIE system, with stroke structuring and surface inference, and are given a simple string as name based on what they represent (eg: `hat.json`).
+
+## Units
+
+* Timestamps are stored as an absolute value relative to some arbitrary origin, it does not necessarily start at 0 at beginning of a given sketch. Time unit is second.
+* All coordinates are in scale of 1 unit = 1m (in real life) when the canvas is at default zoom level. All coordinates are stored in `canvas space` which is often different than user's `world space` due to the possibility to grab the canvas and move it around, or scale it up (up to x3 the default scale). This should be what is desired for most usages (sketch appears fixed).

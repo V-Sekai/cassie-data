@@ -23,6 +23,7 @@ def polyscope_draw_all_sketch(sketch_history, draw_structured = True, skip_delet
 
     N_samples = 40 # nb of samples for the poly-beziers
 
+    # Careful: call this only once in a script!
     ps.init()
 
     # Raw curves
@@ -46,11 +47,8 @@ def polyscope_draw_all_sketch(sketch_history, draw_structured = True, skip_delet
             continue
 
         ctrl_pts = stroke["ctrl_pts"]
-
         input_samples = stroke["input_samples"]
-
         stroke_id = stroke["id"]
-
         creation_time = stroke["creation_time"]
 
         # Add input samples nodes
@@ -72,24 +70,20 @@ def polyscope_draw_all_sketch(sketch_history, draw_structured = True, skip_delet
 
             node_count = 0
 
-            # Add final curve nodes
+            # Add final curve pts
+            pts = np.empty((0,3))
             if curve_is_line(ctrl_pts):
-                # is line
-                nodes_line = []
                 for edge in ctrl_pts:
-                    nodes_line.append(np.array(edge[0]))
-                nodes_line.append(ctrl_pts[-1][1])
-
-                node_count = len(nodes_line)
-
-                nodes_structured = np.append(nodes_structured, np.array(nodes_line), axis = 0)
+                    pts = np.row_stack([pts, np.array(edge[0])])
+                pts = np.row_stack([pts, np.array(ctrl_pts[-1][1])])
                 
             else:
                 theta = np.linspace(0, 1, N_samples)
                 x, y, z = poly_bezier(theta, ctrl_pts)
-                nodes_bezier = np.array([x, y, z]).T
-                node_count = len(nodes_bezier)
-                nodes_structured = np.append(nodes_structured, nodes_bezier, axis = 0)
+                pts = np.array([x, y, z]).T
+
+            node_count = len(pts)
+            nodes_structured = np.append(nodes_structured, pts, axis = 0)
 
             # Generate edge indices
             edges_structured = add_edge_indices_for_stroke(edges_structured, node_count)
@@ -105,5 +99,50 @@ def polyscope_draw_all_sketch(sketch_history, draw_structured = True, skip_delet
     ps_net_input.add_scalar_quantity("Stroke ID", stroke_ids, defined_on='nodes', enabled=False, cmap='viridis')
     if not skip_deleted:
         ps_net_input.add_scalar_quantity("Deletion time", deletion_times, defined_on='nodes', enabled=False, cmap='reds')
+
+    ps.show()
+
+
+def polyscope_draw_sketch_graph(sketch_graph):
+    N_samples = 30 # nb of samples for the poly-beziers
+
+    # Careful: call this only once in a script!
+    ps.init()
+
+    segments_data = sketch_graph["segments"]
+    nodes_data = sketch_graph["nodes"]
+
+    # Nb of incident segments per node
+    neighbors_counts = [np.array(len(node["neighbor_edges"])) for node in nodes_data]
+    max_neighbors = max(neighbors_counts)
+
+    # Register nodes
+    ps_nodes = ps.register_point_cloud("nodes", np.array([np.array(node["position"]) for node in nodes_data]), radius=0.01)
+    ps_nodes.add_scalar_quantity("Neighbors", np.array(neighbors_counts), enabled=True, vminmax=(1,max_neighbors), cmap="reds")
+
+    # Form polylines
+    polylines = []
+    stroke_ids = []
+    for s in segments_data:
+        ctrl_pts = s["ctrl_pts"]
+        pts = np.empty((0,3))
+        if curve_is_line(ctrl_pts):
+            for edge in ctrl_pts:
+                pts = np.row_stack([pts, np.array(edge[0])])
+            pts = np.row_stack([pts, np.array(ctrl_pts[-1][1])])
+            
+        else:
+            theta = np.linspace(0, 1, N_samples)
+            x, y, z = poly_bezier(theta, ctrl_pts)
+            pts = np.array([x, y, z]).T
+
+        polylines.append(pts)
+        stroke_ids += [s["stroke_id"]] * len(pts)
+
+    all_segment_pts = np.row_stack(polylines)
+    all_segment_edges = get_edges_for_strokes(polylines)
+
+    ps_curve_net = ps.register_curve_network("Sketch curve network", all_segment_pts, all_segment_edges)
+    ps_curve_net.add_scalar_quantity("Stroke ID", np.array(stroke_ids), defined_on="nodes")
 
     ps.show()

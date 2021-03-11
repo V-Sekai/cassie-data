@@ -28,6 +28,5 @@ Each file contains a list of stroke objects, each stroke object is described by 
 
 ## Remarks
 
-* Time is stored as an absolute value relative to some arbitrary origin, it does not necessarily start at 0 at beginning of sketch. Time unit is second.
 * The control points refer to the neatened curve obtained from the input samples by our system. In case of the *Freehand* system (files `xx-0-x.json`), this corresponds to simple line/polybézier fitting. In case of the other 2 systems, this corresponds to the neatened curve, taking into account potential intersection and beautification constraints.
 * We store cubic polybéziers as a list of Béziers segments (4 ctrl pts each), and lines as a list of line segments (2 ctrl pts each), although in practice we only have simple lines and no polylines.
