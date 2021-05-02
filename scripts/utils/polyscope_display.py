@@ -1,5 +1,6 @@
 import polyscope as ps
 from utils.curves import *
+from utils.load import parse_ctrl_pts, parse_vec3
 
 def add_edge_indices_for_stroke(indices, node_count):
     N = node_count - 1
@@ -7,7 +8,7 @@ def add_edge_indices_for_stroke(indices, node_count):
     if len(indices) > 0:
         start_idx = indices[-1, -1] + 1
     left = np.arange(start_idx, start_idx + N).reshape(-1,1)
-    right = np.arange(start_idx + 1, start_idx + 1 + N).reshape(-1,1)
+    right = left + 1
     return np.append(indices, np.concatenate((left, right), axis = 1), axis = 0)
 
 def get_edges_for_strokes(polylines):
@@ -117,14 +118,14 @@ def polyscope_draw_sketch_graph(sketch_graph):
     max_neighbors = max(neighbors_counts)
 
     # Register nodes
-    ps_nodes = ps.register_point_cloud("nodes", np.array([np.array(node["position"]) for node in nodes_data]), radius=0.01)
+    ps_nodes = ps.register_point_cloud("Nodes", np.array([np.array(parse_vec3(node["position"])) for node in nodes_data]), radius=0.01)
     ps_nodes.add_scalar_quantity("Neighbors", np.array(neighbors_counts), enabled=True, vminmax=(1,max_neighbors), cmap="reds")
 
     # Form polylines
     polylines = []
     stroke_ids = []
     for s in segments_data:
-        ctrl_pts = s["ctrl_pts"]
+        ctrl_pts = parse_ctrl_pts(s["ctrl_pts"])
         pts = np.empty((0,3))
         if curve_is_line(ctrl_pts):
             for edge in ctrl_pts:
@@ -144,5 +145,21 @@ def polyscope_draw_sketch_graph(sketch_graph):
 
     ps_curve_net = ps.register_curve_network("Sketch curve network", all_segment_pts, all_segment_edges)
     ps_curve_net.add_scalar_quantity("Stroke ID", np.array(stroke_ids), defined_on="nodes")
+
+    ps.show()
+
+
+def polyscope_draw_polylines(polylines):
+    # Careful: call this only once in a script!
+    ps.init()
+
+    pts = np.empty((0,3))
+    edges = np.empty((0,2))
+
+    for polyline in polylines:
+        pts = np.row_stack([pts, np.array(polyline)])
+        edges = add_edge_indices_for_stroke(edges, len(polyline))
+
+    ps.register_curve_network("Sketch", pts, edges)
 
     ps.show()

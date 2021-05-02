@@ -7,11 +7,13 @@ We provide data for:
 * 48 sketches done by 12 participants during a controlled user study (the task was to take max 5 minutes to sketch a running shoe or a desk lamp using 3 variants of the CASSIE system)
 * 16 sketches done to demonstrate the overall system (the models are varied and the sketches are more complex)
 
+Additionnally, we provide some utility python scripts to load and display the data, which will also support data exported directly from our Unity VR sketching application. See code and binaries [here](https://gitlab.inria.fr/D3/cassie).
+
 More details about the CASSIE project: [webpage](https://em-yu.github.io/research/cassie/), [paper](http://www-sop.inria.fr/reves/Basilic/2021/YASBS21/CASSIE_author_version.pdf)
 
 Explore all the sketches directly in your browser: [CASSIE data website](http://www-sop.inria.fr/members/Emilie.Yu/CASSIE-sketch-explorer/)
 
-## ❗About the data
+## About the data
 
 All sketches were collected in our custom VR sketching system, and are not representative of all VR sketching practices in a general context. In particular, the 36 sketches done in *Armature* and *Patch* mode from the study, and the 16 varied sketches were created using specific features from CASSIE that aimed to **help and encourage users to create well-connected curve networks** by sketching. Furthermore, we instructed participants to adopt a **sparse sketching style** in their drawings.
 
@@ -19,13 +21,14 @@ All sketches were collected in our custom VR sketching system, and are not repre
 
 The data files available are, for each sketch, in 3 sub-folders:
 
+* [`curves`](data/curves#curves-data) : a simple file format where all strokes present in the final sketch are listed as polylines. We give the input/non beautified strokes here.
 * [`sketch_history`](data/sketch_history#sketch-history-data) : a list of all strokes sketched during the session, along with creation/deletion time (if deleted), and both the raw input samples captured from the controller position and the structured result outputed by CASSIE (in the form of a poly-Bézier or line).
 * [`sketch_graph`](data/sketch_graph#sketch-graph-data) : lists of strokes, graph segments and graph nodes that describe the connectivity structure of the sketch (NB: this is only available for structured sketches, done in *Armature* and *Patch* systems).
 * [`raw_data`](data/raw_data#raw-data) : direct export from CASSIE interactive applications, in the form of a full history of actions undertaken by the user during this session, and lists of primitives (strokes and patches) created (NB: the mesh for each patch was not recorded).
 
-For most purposes, the data from `sketch_history` folder should contain all necessary data. For example, these files are used to visualize sketching sessions on the [CASSIE data website](http://www-sop.inria.fr/members/Emilie.Yu/CASSIE-sketch-explorer/).
+For most purposes, the data from `curves` or `sketch_history` folders should contain all necessary data. For example, `sketch_history` files are used to visualize sketching sessions on the [CASSIE data website](http://www-sop.inria.fr/members/Emilie.Yu/CASSIE-sketch-explorer/).
 
-Each of the 3 folders has a README detailing the specific schema used for the data.
+Each of the 4 folders has a README detailing the specific schema used for the data.
 
 ## Scripts
 
@@ -36,7 +39,10 @@ For example, you can try to display a sketch by running *(NB: needs polyscope to
 ```bash
 > cd scripts
 
-# Display the hat sketch
+# Display the final hmd sketch (input strokes)
+> python3 example_curves_file "hmd_modern.curves"
+
+# Display the hat sketch (input strokes and beautified, with sketched time visualized)
 > python3 example_sketch_history.py "hat.json"
 
 # Display the sketch from participant 9, done with the Armature system (1), of the shoe model (2)
@@ -46,7 +52,7 @@ For example, you can try to display a sketch by running *(NB: needs polyscope to
 > python3 example_sketch_graph.py 2 2 2
 ```
 
-Or launch the jupyter notebook [`Example - sketch history with pythreejs.ipynb`](scripts/Example%20-%20sketch%20history%20with%20pythreejs.html) *(NB: needs pythreejs if you want to run it locally)*.
+Or launch the jupyter notebook [`Example - sketch history with pythreejs.ipynb`](scripts/Example%20-%20sketch%20history%20with%20pythreejs.ipynb) *(NB: needs pythreejs if you want to run it locally)*.
 
 ## File naming convention
 

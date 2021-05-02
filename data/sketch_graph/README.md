@@ -2,7 +2,9 @@
 
 Each file contains a lists of strokes, graph segments and graph nodes that describe the connectivity structure of the sketch. This is only available for structured sketches, done in *Armature* and *Patch* systems.
 
-This data can be used to test algorithms for automatic cycle detection on curve networks. However, please note that curve networks may have some erroneous connectivity, due to minor misses of our structuring method. Furthermore, we did not instruct participants to take specific care to draw well-connected networks, and some of them did not - especially in *Armature* mode. All "free creations" - bigger sketches done outside of the study (those that have a textual name) - should have mostly correct connectivity.
+This data can be used to test algorithms for automatic cycle detection on curve networks. However, please note that curve networks may have some erroneous connectivity, due to minor misses of our structuring method. Furthermore, we did not instruct participants to take specific care to draw well-connected networks, and some of them did not - especially in *Armature* mode.
+
+You can generate your own curve network data by sketching using our [VR Unity application](https://gitlab.inria.fr/D3/cassie).
 
 The sketch graph data represents the final state of the sketch, contrary to the sketch history which represents the evolution of a sketch.
 
@@ -47,12 +49,15 @@ Each files contains a JSON object described by the following scheme:
   ],
   // All nodes of the graph
   nodes: [
-    // Node ID
-    id: r,
-    // Node position
-    position: [x, y, z],
-    // ID of segments incident on that node
-    neighbor_edges: [k, ...]
+    {
+      // Node ID
+      id: r,
+      // Node position
+      position: [x, y, z],
+      // ID of segments incident on that node
+      neighbor_edges: [k, ...]
+    },
+    ...
   ]
 }
 ```
