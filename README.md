@@ -9,9 +9,11 @@ We provide data for:
 
 Additionnally, we provide some utility python scripts to load and display the data, which will also support data exported directly from our Unity VR sketching application. See code and binaries [here](https://gitlab.inria.fr/D3/cassie).
 
-More details about the CASSIE project: [webpage](https://ns.inria.fr/d3/CASSIE/), [paper](http://www-sop.inria.fr/reves/Basilic/2021/YASBS21/CASSIE_author_version.pdf)
+More details about the CASSIE project: [webpage](https://ns.inria.fr/d3/CASSIE/), [paper](http://www-sop.inria.fr/reves/Basilic/2021/YASBS21/CASSIE_author_version.pdf).
 
-Explore all the sketches directly in your browser: [CASSIE data website](https://ns.inria.fr/d3/CASSIE/sketch-explorer/)
+Explore all the sketches directly in your browser: [CASSIE data website](https://ns.inria.fr/d3/CASSIE/sketch-explorer/).
+
+If this is useful for your research, please [cite us](#citing-this-project).
 
 ## About the data
 
@@ -79,3 +81,20 @@ The sketches done outside of the study are all done in the full CASSIE system, w
 
 * Timestamps are stored as an absolute value relative to some arbitrary origin, it does not necessarily start at 0 at beginning of a given sketch. Time unit is second.
 * All coordinates are in scale of 1 unit = 1m (in real life) when the canvas is at default zoom level. All coordinates are stored in `canvas space` which is often different than user's `world space` due to the possibility to grab the canvas and move it around, or scale it up (up to x3 the default scale). This should be what is desired for most usages (sketch appears fixed).
+
+
+## License
+
+The code and data in this repository is provided under the MIT License.
+
+## Citing this project
+
+```latex
+@InProceedings{YASBS21,
+  author       = "Yu, Emilie and Arora, Rahul and Stanko, Tibor and Bærentzen, J. Andreas and Singh, Karan and Bousseau, Adrien",
+  title        = "CASSIE: Curve and Surface Sketching in Immersive Environments",
+  booktitle    = "ACM Conference on Human Factors in Computing Systems (CHI)",
+  year         = "2021",
+  url          = "http://www-sop.inria.fr/reves/Basilic/2021/YASBS21"
+}
+```
