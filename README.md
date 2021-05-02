@@ -9,9 +9,9 @@ We provide data for:
 
 Additionnally, we provide some utility python scripts to load and display the data, which will also support data exported directly from our Unity VR sketching application. See code and binaries [here](https://gitlab.inria.fr/D3/cassie).
 
-More details about the CASSIE project: [webpage](https://em-yu.github.io/research/cassie/), [paper](http://www-sop.inria.fr/reves/Basilic/2021/YASBS21/CASSIE_author_version.pdf)
+More details about the CASSIE project: [webpage](https://ns.inria.fr/d3/CASSIE/), [paper](http://www-sop.inria.fr/reves/Basilic/2021/YASBS21/CASSIE_author_version.pdf)
 
-Explore all the sketches directly in your browser: [CASSIE data website](http://www-sop.inria.fr/members/Emilie.Yu/CASSIE-sketch-explorer/)
+Explore all the sketches directly in your browser: [CASSIE data website](https://ns.inria.fr/d3/CASSIE/sketch-explorer/)
 
 ## About the data
 
@@ -26,7 +26,7 @@ The data files available are, for each sketch, in 3 sub-folders:
 * [`sketch_graph`](data/sketch_graph#sketch-graph-data) : lists of strokes, graph segments and graph nodes that describe the connectivity structure of the sketch (NB: this is only available for structured sketches, done in *Armature* and *Patch* systems).
 * [`raw_data`](data/raw_data#raw-data) : direct export from CASSIE interactive applications, in the form of a full history of actions undertaken by the user during this session, and lists of primitives (strokes and patches) created (NB: the mesh for each patch was not recorded).
 
-For most purposes, the data from `curves` or `sketch_history` folders should contain all necessary data. For example, `sketch_history` files are used to visualize sketching sessions on the [CASSIE data website](http://www-sop.inria.fr/members/Emilie.Yu/CASSIE-sketch-explorer/).
+For most purposes, the data from `curves` or `sketch_history` folders should contain all necessary data. For example, `sketch_history` files are used to visualize sketching sessions on the [CASSIE data website](https://ns.inria.fr/d3/CASSIE/sketch-explorer/).
 
 Each of the 4 folders has a README detailing the specific schema used for the data.
 

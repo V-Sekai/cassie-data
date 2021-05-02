@@ -2,13 +2,15 @@
 
 Each file contains a lists of strokes, graph segments and graph nodes that describe the connectivity structure of the sketch. This is only available for structured sketches, done in *Armature* and *Patch* systems.
 
+The sketch graph data represents the final state of the sketch, contrary to the sketch history which represents the evolution of a sketch. A stroke is composed of one or multiple segments, and segments have 2 endpoint nodes. Multiple segments may meet at a node.
+
 This data can be used to test algorithms for automatic cycle detection on curve networks. However, please note that curve networks may have some erroneous connectivity, due to minor misses of our structuring method. Furthermore, we did not instruct participants to take specific care to draw well-connected networks, and some of them did not - especially in *Armature* mode.
 
-You can generate your own curve network data by sketching using our [VR Unity application](https://gitlab.inria.fr/D3/cassie).
+Because of a lack of data export features at the time of the user study and generation of most of the results in the paper, we did not export the curve network data from the application, and instead did a post-processing procedure where we tried to recover the curve network data by detecting intersections in the sketch. This was done in a hurry and pretty poorly, so our networks may have some errors such as missing connectivity at some nodes or overly-connected parts, in very dense zones.
 
-The sketch graph data represents the final state of the sketch, contrary to the sketch history which represents the evolution of a sketch.
+You can generate your own curve network data by sketching using our [VR Unity application](https://gitlab.inria.fr/D3/cassie). The export feature has been implemented so your exported curve network will match exactlty the connectivity of your sketch.
 
-A stroke is composed of one or multiple segments, and segments have 2 endpoint nodes. Multiple segments may meet at a node.
+
 
 ## Examples of use
 
